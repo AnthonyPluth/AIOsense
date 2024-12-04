@@ -14,8 +14,11 @@ esp32:
   board: esp32-s3-devkitc-1
   variant: esp32s3
   framework:
+  # TODO: try esp-idf
     type: arduino
     version: latest
+
+# TODO: add support for XMOS chip
 
 i2c:
   sda: GPIO35
@@ -24,3 +27,7 @@ i2c:
 sensor:
   - platform: internal_temperature
     name: "CPU Temperature"
+
+psram:
+  mode: octal
+  speed: 80MHz
