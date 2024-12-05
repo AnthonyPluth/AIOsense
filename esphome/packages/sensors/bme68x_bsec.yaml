@@ -42,21 +42,12 @@ sensor:
       name: "IAQ"
       id: iaq
       device_class: aqi
-      filters:
-        - offset: ${iaq_offset}
-        - lambda: "return x + id(iaq_offset_ui).state;"
     co2_equivalent:
       name: "CO2 Equivalent"
       device_class: carbon_dioxide
-      filters:
-        - offset: ${co2_offset}
-        - lambda: "return x + id(co2_offset_ui).state;"
     breath_voc_equivalent:
       name: "Breath VOC Equivalent"
       device_class: volatile_organic_compounds
-      filters:
-        - offset: ${voc_offset}
-        - lambda: "return x + id(voc_offset_ui).state;"
 
 number:
   - platform: template
