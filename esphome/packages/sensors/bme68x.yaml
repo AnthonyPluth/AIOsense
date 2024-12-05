@@ -1,5 +1,5 @@
 substitutions:
-  bme_address: "0x76"
+  bme_address: "0x77"
   co2_offset: "0"
   humidity_offset: "0"
   iaq_offset: "0"
