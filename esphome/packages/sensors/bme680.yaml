@@ -3,44 +3,7 @@ substitutions:
   bme_update_interval: "30s"
   humidity_offset: "0"
   pressure_offset: "0"
-  temperature_offset: "0"
-
-bme68x_bsec2_i2c:
-  address: "${bme_address}"
-  model: bme680
-  operating_age: 28d
-  sample_rate: LP
-  supply_voltage: 3.3V
-  id: bme680_sensor
-
-sensor:
-  - platform: bme68x_bsec2
-    bme68x_bsec2_id: bme680_sensor
-    temperature:
-      name: "Temperature"
-      filters:
-        - offset: ${temperature_offset}
-        - lambda: "return x + id(temperature_offset_ui).state;"
-    pressure:
-      name: "Pressure"
-      filters:
-        - offset: ${pressure_offset}
-        - lambda: "return x + id(pressure_offset_ui).state;"
-    humidity:
-      name: "Humidity"
-      filters:
-        - offset: ${humidity_offset}
-        - lambda: "return x + id(humidity_offset_ui).state;"
-    iaq:
-      name: "IAQ"
-      id: iaq
-      device_class: aqi
-    co2_equivalent:
-      name: "CO2 Equivalent"
-      device_class: carbon_dioxide
-    breath_voc_equivalent:
-      name: "Breath VOC Equivalent"
-      device_class: volatile_organic_compounds
+  temperature_offset: "-6"
 
 number:
   - platform: template
@@ -57,8 +20,8 @@ number:
     initial_value: 0
     icon: "mdi:thermometer"
     entity_category: config
-    # on_value:
-      # - lambda: 'id(bme680_sensor).update();'
+    on_value:
+      - lambda: 'id(bme680_sensor).update();'
 
   - platform: template
     name: "Humidity Offset"
@@ -74,8 +37,8 @@ number:
     initial_value: 0
     icon: "mdi:water-percent"
     entity_category: config
-    # on_value:
-    #   - lambda: 'id(bme680_sensor).update();'
+    on_value:
+      - lambda: 'id(bme680_sensor).update();'
 
   - platform: template
     name: "Pressure Offset"
@@ -91,38 +54,28 @@ number:
     initial_value: 0
     icon: "mdi:gauge"
     entity_category: config
-    # on_value:
-    #   - lambda: 'id(bme680_sensor).update();'
+    on_value:
+      - lambda: 'id(bme680_sensor).update();'
 
-text_sensor:
-  - platform: bme68x_bsec2
-    iaq_accuracy:
-      name: "IAQ Accuracy"
-  - platform: template
-    name: "IAQ Classification"
-    icon: "mdi:checkbox-marked-circle-outline"
-    lambda: |-
-      if ( int(id(iaq).state) <= 50) {
-        return {"Excellent"};
-      }
-      else if (int(id(iaq).state) >= 51 && int(id(iaq).state) <= 100) {
-        return {"Good"};
-      }
-      else if (int(id(iaq).state) >= 101 && int(id(iaq).state) <= 150) {
-        return {"Lightly polluted"};
-      }
-      else if (int(id(iaq).state) >= 151 && int(id(iaq).state) <= 200) {
-        return {"Moderately polluted"};
-      }
-      else if (int(id(iaq).state) >= 201 && int(id(iaq).state) <= 250) {
-        return {"Heavily polluted"};
-      }
-      else if (int(id(iaq).state) >= 251 && int(id(iaq).state) <= 350) {
-        return {"Severely polluted"};
-      }
-      else if (int(id(iaq).state) >= 351) {
-        return {"Extremely polluted"};
-      }
-      else {
-        return {"error"};
-      }
+sensor:
+  - platform: bme680
+    id: bme680_sensor
+    address: "${bme_address}"
+    update_interval: "${bme_update_interval}"
+    temperature:
+      name: "Temperature"
+      filters:
+        - offset: ${temperature_offset}
+        - lambda: "return x + id(temperature_offset_ui).state;"
+    humidity:
+      name: "Humidity"
+      filters:
+        - offset: ${humidity_offset}
+        - lambda: "return x + id(humidity_offset_ui).state;"
+    pressure:
+      name: "Pressure"
+      filters:
+        - offset: ${pressure_offset}
+        - lambda: "return x + id(pressure_offset_ui).state;"
+    gas_resistance:
+      name: "Gas Resistance"
