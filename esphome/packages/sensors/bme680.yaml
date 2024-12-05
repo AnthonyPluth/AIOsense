@@ -1,5 +1,5 @@
 substitutions:
-  bme_address: "0x76"
+  bme_address: "0x77"
   bme_update_interval: "30s"
   humidity_offset: "0"
   pressure_offset: "0"
@@ -97,7 +97,7 @@ number:
 text_sensor:
   - platform: bme68x_bsec2
     iaq_accuracy:
-      name: "BME68x IAQ Accuracy"
+      name: "IAQ Accuracy"
   - platform: template
     name: "IAQ Classification"
     icon: "mdi:checkbox-marked-circle-outline"
