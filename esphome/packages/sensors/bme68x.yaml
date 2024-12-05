@@ -38,14 +38,14 @@ sensor:
       float humidity_score = (100.0 - abs(humidity_baseline - id(humidity).state));
       return (gas_score + humidity_score) / 2.0;
   - platform: template
-    name: "${entitysub} CO2 Equivalent"
+    name: "CO2 Equivalent"
     device_class: carbon_dioxide
     unit_of_measurement: "ppm"
     lambda: |-
       float gas = id(gas_resistance).state;
       return (gas > 0) ? 400 + ((gas / 10000.0) * 1000) : 400;
   - platform: template
-    name: "${entitysub} Breath VOC Equivalent"
+    name: "Breath VOC Equivalent"
     device_class: volatile_organic_compounds
     unit_of_measurement: "ppm"
     lambda: |-
