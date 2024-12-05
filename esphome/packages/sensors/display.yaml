@@ -12,4 +12,4 @@ display:
     address: 0x3C
     lambda: |-
       // %% - literal % sign
-      it.printf(0, 0, id(roboto), "IAQ: %f", id(iaq).state);
+      it.printf(0, 0, id(roboto), "IAQ: %f", id(temperature_offset_ui).state);
