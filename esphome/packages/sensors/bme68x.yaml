@@ -6,6 +6,7 @@ substitutions:
 
 sensor:
   - platform: bme680
+    address: ${bme_address}
     temperature:
       name: "Temperature"
       filters:
