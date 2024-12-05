@@ -1,0 +1,15 @@
+font:
+  # gfonts://family[@weight]
+  - file: "gfonts://Roboto"
+    id: roboto
+    size: 12
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    # TODO: update these pins
+    reset_pin: D0
+    address: 0x3C
+    lambda: |-
+      // %% - literal % sign
+      it.printf(0, 0, id(roboto), "IAQ: %.1f°C", id(iaq)).state);
