@@ -78,4 +78,15 @@ sensor:
         - offset: ${pressure_offset}
         - lambda: "return x + id(pressure_offset_ui).state;"
     gas_resistance:
-      name: "Gas Resistance"
+      id: gas_resistance
+      name: Gas Resistance
+    iaq:
+      id: iaq
+      name: Indoor Air Quality
+      device_class: aqi
+    co2_equivalent:
+      name: CO2 Equivalent
+      device_class: carbon_dioxide
+    breath_voc_equivalent:
+      name: Breath VOC Equivalent
+      device_class: volatile_organic_compounds
