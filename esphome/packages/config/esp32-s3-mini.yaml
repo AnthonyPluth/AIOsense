@@ -18,7 +18,7 @@ esp32:
     type: arduino
     version: latest
 
-# TODO: add support for XMOS chip
+# TODO: add support for XMOS chip?
 
 i2c:
   sda: GPIO35
