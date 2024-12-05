@@ -104,51 +104,6 @@ number:
     icon: "mdi:gauge"
     entity_category: config
 
-  - platform: template
-    name: "CO2 Offset"
-    id: co2_offset_ui
-    unit_of_measurement: "ppm"
-    min_value: -1000
-    max_value: 1000
-    step: 1
-    mode: box
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 0
-    icon: "mdi:test-tube"
-    entity_category: config
-
-  - platform: template
-    name: "VOC Offset"
-    id: voc_offset_ui
-    unit_of_measurement: "ppm"
-    min_value: -1000
-    max_value: 1000
-    step: 1
-    mode: box
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 0
-    icon: "mdi:test-tube"
-    entity_category: config
-
-  - platform: template
-    name: "IAQ Offset"
-    id: iaq_offset_ui
-    unit_of_measurement: "IAQ"
-    min_value: -400
-    max_value: 400
-    step: 1
-    mode: box
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 0
-    icon: "mdi:gauge"
-    entity_category: config
-
 text_sensor:
   - platform: template
     name: "IAQ Classification"
