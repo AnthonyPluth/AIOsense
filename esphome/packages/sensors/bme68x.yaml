@@ -22,6 +22,7 @@ sensor:
       id: gas_resistance
     humidity:
       name: "Humidity"
+      id: humidity
       filters:
         - offset: ${humidity_offset}
         - lambda: "return x + id(humidity_offset_ui).state;"
