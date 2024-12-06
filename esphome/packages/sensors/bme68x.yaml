@@ -45,7 +45,7 @@ sensor:
       const float gas_baseline = 100000.0;
 
       // Gas reading from the BME680 sensor.
-      float gas = id(gas_res_sensor).state;
+      float gas = id(gas_resistance).state;
 
       // If no valid reading, default to a "good" AQI.
       if (gas <= 0) {
@@ -97,8 +97,8 @@ sensor:
       const float hum_baseline = 40.0;       // Ideal humidity baseline
       const float hum_weight   = 0.25;       // Weight factor for humidity correction
 
-      float gas = id(gas_res_sensor).state;
-      float hum = id(humidity_sensor).state; // Replace with your actual humidity sensor ID
+      float gas = id(gas_resistance).state;
+      float hum = id(humidity).state;
 
       if (gas <= 0) {
         return 400.0;
@@ -128,7 +128,7 @@ sensor:
       const float min_voc_ppm = 0.05;
 
       // Read the current gas resistance from your BME680 sensor.
-      float gas = id(gas_res_sensor).state;
+      float gas = id(gas_resistance).state;
 
       if (gas <= 0) {
         // If no valid reading, fall back to minimum baseline VOC.
