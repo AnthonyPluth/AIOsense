@@ -63,8 +63,6 @@ sensor:
       //
       // AQI = 50 * (ratio)^3 if ratio >= 1
       // AQI = 50 * (ratio)   if ratio < 1
-      //
-      // This is just one possible mapping. Tweak as necessary.
       
       float aqi;
       if (ratio >= 1.0) {
@@ -78,7 +76,7 @@ sensor:
         aqi = 500.0;
       }
 
-      // Optionally, ensure a minimum of 0.
+      // Ensure a minimum of 0.
       if (aqi < 0.0) {
         aqi = 0.0;
       }
@@ -89,9 +87,6 @@ sensor:
     name: "CO2 Equivalent"
     device_class: carbon_dioxide
     unit_of_measurement: "ppm"
-    # lambda: |-
-    #   float gas = id(gas_resistance).state;
-    #   return (gas > 0) ? 400 + ((gas / 10000.0) * 1000) : 400;
     lambda: |-
       const float gas_baseline = 100000.0;
       const float hum_baseline = 40.0;       // Ideal humidity baseline
@@ -120,8 +115,6 @@ sensor:
     device_class: volatile_organic_compounds
     unit_of_measurement: "ppm"
     lambda: |-
-      // Baseline gas resistance (in ohms) under known clean air conditions.
-      // You should measure the sensor in a known low-VOC (fresh outdoor air) environment to refine this.
       const float gas_baseline = 100000.0;
 
       // Minimum VOC reading at baseline conditions (just a guess; may be set to near-zero).
@@ -139,7 +132,6 @@ sensor:
       float ratio = gas_baseline / gas;
 
       // Use a power law to scale the ratio into a VOC ppm estimate.
-      // This is arbitrary and should be tuned. 
       // If ratio = 1 (clean), VOC ~ 0.05 ppm.
       // If ratio > 1 (lower resistance => more VOC), VOC ppm will rise.
       float voc_ppm = min_voc_ppm * pow(ratio, 3.0);
