@@ -8,12 +8,14 @@ sensor:
   - platform: bme680
     address: ${bme_address}
     temperature:
+      id: temperature
       name: "Temperature"
       filters:
         - offset: ${temperature_offset}
         - lambda: "return x + id(temperature_offset_ui).state;" 
     pressure:
       name: "Pressure"
+      id: pressure
       device_class: atmospheric_pressure
       filters:
         - offset: ${pressure_offset}
@@ -32,26 +34,117 @@ sensor:
     id: iaq
     icon: "mdi:air-filter"
     device_class: aqi
+    # lambda: |-
+    #   const float humidity_baseline = 40.0;
+    #   const float gas_baseline = 10000.0;
+    #   float gas_score = (id(gas_resistance).state / gas_baseline) * 100.0;
+    #   float humidity_score = (100.0 - abs(humidity_baseline - id(humidity).state));
+    #   return (gas_score + humidity_score) / 2.0;
     lambda: |-
-      const float humidity_baseline = 40.0;
-      const float gas_baseline = 10000.0;
-      float gas_score = (id(gas_resistance).state / gas_baseline) * 100.0;
-      float humidity_score = (100.0 - abs(humidity_baseline - id(humidity).state));
-      return (gas_score + humidity_score) / 2.0;
+      // Baseline gas resistance in ohms under known clean conditions.
+      const float gas_baseline = 100000.0;
+
+      // Gas reading from the BME680 sensor.
+      float gas = id(gas_res_sensor).state;
+
+      // If no valid reading, default to a "good" AQI.
+      if (gas <= 0) {
+        return 50.0;
+      }
+
+      // Calculate the ratio of baseline to current gas.
+      float ratio = gas_baseline / gas;
+
+      // Heuristic mapping to AQI:
+      // At ratio = 1 (baseline), let's assign AQI ~ 50 (Moderate).
+      // If ratio < 1 (gas > baseline => cleaner), we reduce AQI below 50.
+      // If ratio > 1 (gas < baseline => more VOCs), we increase AQI above 50.
+      // We'll use a power function for scaling:
+      //
+      // AQI = 50 * (ratio)^3 if ratio >= 1
+      // AQI = 50 * (ratio)   if ratio < 1
+      //
+      // This is just one possible mapping. Tweak as necessary.
+      
+      float aqi;
+      if (ratio >= 1.0) {
+        aqi = 50.0 * pow(ratio, 3.0); 
+      } else {
+        aqi = 50.0 * ratio; 
+      }
+
+      // Clamp AQI to a maximum of 500 for sanity's sake.
+      if (aqi > 500.0) {
+        aqi = 500.0;
+      }
+
+      // Optionally, ensure a minimum of 0.
+      if (aqi < 0.0) {
+        aqi = 0.0;
+      }
+
+      return aqi;
+
   - platform: template
     name: "CO2 Equivalent"
     device_class: carbon_dioxide
     unit_of_measurement: "ppm"
+    # lambda: |-
+    #   float gas = id(gas_resistance).state;
+    #   return (gas > 0) ? 400 + ((gas / 10000.0) * 1000) : 400;
     lambda: |-
-      float gas = id(gas_resistance).state;
-      return (gas > 0) ? 400 + ((gas / 10000.0) * 1000) : 400;
+      const float gas_baseline = 100000.0;
+      const float hum_baseline = 40.0;       // Ideal humidity baseline
+      const float hum_weight   = 0.25;       // Weight factor for humidity correction
+
+      float gas = id(gas_res_sensor).state;
+      float hum = id(humidity_sensor).state; // Replace with your actual humidity sensor ID
+
+      if (gas <= 0) {
+        return 400.0;
+      }
+
+      float hum_offset = hum - hum_baseline;
+      float hum_correction = 1.0 + (hum_weight * hum_offset / 100.0);
+
+      float ratio = gas_baseline / (gas * hum_correction);
+      float co2 = 400.0 * pow(ratio, 3.0);
+
+      if (co2 < 400.0) {
+        co2 = 400.0;
+      }
+
+      return co2;
   - platform: template
     name: "Breath VOC Equivalent"
     device_class: volatile_organic_compounds
     unit_of_measurement: "ppm"
     lambda: |-
-      float gas = id(gas_resistance).state;
-      return (gas > 0) ? (gas / 1000.0) : 0;
+      // Baseline gas resistance (in ohms) under known clean air conditions.
+      // You should measure the sensor in a known low-VOC (fresh outdoor air) environment to refine this.
+      const float gas_baseline = 100000.0;
+
+      // Minimum VOC reading at baseline conditions (just a guess; may be set to near-zero).
+      const float min_voc_ppm = 0.05;
+
+      // Read the current gas resistance from your BME680 sensor.
+      float gas = id(gas_res_sensor).state;
+
+      if (gas <= 0) {
+        // If no valid reading, fall back to minimum baseline VOC.
+        return min_voc_ppm;
+      }
+
+      // Calculate the ratio of baseline to current gas resistance.
+      float ratio = gas_baseline / gas;
+
+      // Use a power law to scale the ratio into a VOC ppm estimate.
+      // This is arbitrary and should be tuned. 
+      // If ratio = 1 (clean), VOC ~ 0.05 ppm.
+      // If ratio > 1 (lower resistance => more VOC), VOC ppm will rise.
+      float voc_ppm = min_voc_ppm * pow(ratio, 3.0);
+
+      return voc_ppm;
 
 number:
   - platform: template

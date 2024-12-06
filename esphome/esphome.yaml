@@ -38,7 +38,7 @@ packages:
       - esphome/packages/sensors/bh1750.yaml
       # - esphome/packages/sensors/bme280.yaml  # enable for bme280
       - esphome/packages/sensors/bme68x.yaml  # enable for bme680
-      - esphome/packages/sensors/buzzer.yaml  # PCB >= v2.1.0
+      # - esphome/packages/sensors/buzzer.yaml  # PCB >= v2.1.0
       - esphome/packages/sensors/display.yaml
       - esphome/packages/sensors/occupancy.yaml  # only if pir & mmWave are activated
       - esphome/packages/sensors/pir.yaml
