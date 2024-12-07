@@ -10,6 +10,7 @@ sensor:
     temperature:
       id: temperature
       name: "Temperature"
+      state_class: measurement
       filters:
         - offset: ${temperature_offset}
         - lambda: "return x + id(temperature_offset_ui).state;" 
@@ -17,15 +18,18 @@ sensor:
       name: "Pressure"
       id: pressure
       device_class: atmospheric_pressure
+      state_class: measurement
       filters:
         - offset: ${pressure_offset}
         - lambda: "return x + id(pressure_offset_ui).state;"
     gas_resistance:
       name: "Gas Resistance" # in Ω
       id: gas_resistance
+      state_class: measurement
     humidity:
       name: "Humidity"
       id: humidity
+      state_class: measurement
       filters:
         - offset: ${humidity_offset}
         - lambda: "return x + id(humidity_offset_ui).state;"
@@ -34,6 +38,7 @@ sensor:
     id: iaq
     icon: "mdi:air-filter"
     device_class: aqi
+    state_class: measurement
     # lambda: |-
     #   const float humidity_baseline = 40.0;
     #   const float gas_baseline = 10000.0;
@@ -87,6 +92,7 @@ sensor:
     name: "CO2 Equivalent"
     device_class: carbon_dioxide
     unit_of_measurement: "ppm"
+    state_class: measurement
     lambda: |-
       const float gas_baseline = 100000.0;
       const float hum_baseline = 40.0;       // Ideal humidity baseline
@@ -114,6 +120,7 @@ sensor:
     name: "Breath VOC Equivalent"
     device_class: volatile_organic_compounds
     unit_of_measurement: "ppm"
+    state_class: measurement
     lambda: |-
       const float gas_baseline = 100000.0;
 
@@ -213,7 +220,3 @@ text_sensor:
       else {
         return {"error"};
       }
-
-
-
-      
