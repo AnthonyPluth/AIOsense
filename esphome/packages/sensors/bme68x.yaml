@@ -39,6 +39,7 @@ sensor:
     icon: "mdi:air-filter"
     device_class: aqi
     state_class: measurement
+    unit_of_measurement: "IAQ"
     # lambda: |-
     #   const float humidity_baseline = 40.0;
     #   const float gas_baseline = 10000.0;
