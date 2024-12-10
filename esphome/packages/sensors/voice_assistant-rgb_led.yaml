@@ -12,9 +12,30 @@ microphone:
     i2s_audio_id: i2s_in
     pdm: false
 
+microphone:
+  - platform: i2s_audio
+    id: mic_i2s
+    i2s_din_pin: "${i2s_din_pin}"  # SD
+    adc_type: external
+    pdm: false
+    sample_rate: 16000
+    bits_per_sample: 32bit
+    # i2s_mode: secondary
+    i2s_audio_id: i2s_in
+    # channel_0:
+    #   id: asr_mic
+    #   amplify_shift: 0
+    # channel_1:
+    #   id: comm_mic
+    #   amplify_shift: 2
+
+
+
 voice_assistant:
   id: va
   microphone: mic_i2s
+  micro_wake_word: mww
+  use_wake_word: false
   noise_suppression_level: 2
   auto_gain: 31dBFS
   volume_multiplier: 2.0
@@ -115,3 +136,48 @@ esphome:
               switch.is_on: use_wake_word
             then:
               - voice_assistant.start_continuous:
+
+micro_wake_word:
+  id: mww
+  models:
+    - model: https://github.com/kahrendt/microWakeWord/releases/download/v2.1_models/okay_nabu.json
+      id: okay_nabu
+    - model: https://github.com/kahrendt/microWakeWord/releases/download/v2.1_models/alexa.json
+      id: alexa
+    - model: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
+      id: stop
+      internal: true
+  vad:
+    model: https://github.com/kahrendt/microWakeWord/releases/download/v2.1_models/vad.json
+  microphone: mic_i2s
+  on_wake_word_detected:
+    # If a timer is ringing: Stop it, do not start the voice assistant (We can stop timer from voice!)
+    - if:
+        condition:
+          switch.is_on: timer_ringing
+        then:
+          - switch.turn_off: timer_ringing
+        # Start voice assistant, stop current announcement.
+        else:
+          - if:
+              condition:
+                lambda: return id(nabu_media_player)->state == media_player::MediaPlayerState::MEDIA_PLAYER_STATE_ANNOUNCING;
+              then:
+                lambda: |-
+                  id(nabu_media_player)
+                    ->make_call()
+                    .set_command(media_player::MediaPlayerCommand::MEDIA_PLAYER_COMMAND_STOP)
+                    .set_announcement(true)
+                    .perform();
+              else:
+                - if:
+                    condition:
+                      switch.is_on: wake_sound
+                    then:
+                      - script.execute:
+                          id: play_sound
+                          priority: true
+                          sound_file: !lambda return id(wake_word_triggered_sound);
+                      - delay: 300ms
+                - voice_assistant.start:
+                    wake_word: !lambda return wake_word;
