@@ -28,5 +28,5 @@ sensor:
     name: "CPU Temperature"
 
 psram:
-  mode: octal
+  mode: quad
   speed: 80MHz
