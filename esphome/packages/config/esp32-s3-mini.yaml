@@ -27,6 +27,6 @@ sensor:
   - platform: internal_temperature
     name: "CPU Temperature"
 
-psram:
-  mode: quad
-  speed: 80MHz
+# psram:
+#   mode: quad
+#   speed: 80MHz
