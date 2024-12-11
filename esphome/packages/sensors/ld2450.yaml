@@ -122,8 +122,8 @@ button:
   - platform: ld2450
     factory_reset:
       name: "mmWave Factory Reset"
-    reboot:
-      name: "mmWave Restart"
+    # reboot:
+      # name: "mmWave Restart"
 
 text_sensor:
   - platform: ld2450
