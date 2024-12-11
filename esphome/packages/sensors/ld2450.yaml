@@ -36,7 +36,7 @@ number:
 - platform: ld2450
   rotate:
     restore_value: true
-    initial_value: 180
+    initial_value: 0
     name: "mmWave Rotate angle"
   presence_timeout:
     name: "mmWave Presence timeout"
