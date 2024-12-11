@@ -7,8 +7,8 @@ external_components:
 
 uart:
   id: uart_bus
-  tx_pin: "${uart_tx_pin}"
-  rx_pin: "${uart_rx_pin}"
+  tx_pin: "${uart_rx_pin}"
+  rx_pin: "${uart_tx_pin}"
   baud_rate: 256000
   parity: NONE
   stop_bits: 1
@@ -16,7 +16,7 @@ uart:
 ld2450:
   uart_id: uart_bus
   update_interval: 1s
-  invert_y: true
+  invert_y: false
   invert_x: false
 
 binary_sensor:
@@ -36,7 +36,7 @@ number:
 - platform: ld2450
   rotate:
     restore_value: true
-    initial_value: 0
+    initial_value: 180
     name: "mmWave Rotate angle"
   presence_timeout:
     name: "mmWave Presence timeout"
@@ -58,7 +58,6 @@ number:
       name: R0X1
     y1:
       name: R0Y1
-
   region_1:
     x0:
       name: R1X0
@@ -68,7 +67,6 @@ number:
       name: R1X1
     y1:
       name: R1Y1
-
   region_2:
     x0:
       name: R2X0
