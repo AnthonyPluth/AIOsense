@@ -1,138 +1,122 @@
 external_components:
-  - source:
-      type: git
-      url: https://github.com/uncle-yura/esphome-ld2450
-      ref: master
+  - source: github://pr#5674
     components: [ ld2450 ]
+    refresh: 0s
 
 uart:
   id: uart_bus
-  tx_pin: "${uart_rx_pin}"
-  rx_pin: "${uart_tx_pin}"
+  rx_pin: 
+    number: "${uart_rx_pin}"
+    mode:
+      input: true
+      pullup: true
+  tx_pin: 
+    number: "${uart_tx_pin}"
+    mode:
+      input: true
+      pullup: true
   baud_rate: 256000
   parity: NONE
   stop_bits: 1
 
 ld2450:
+  id: ld2450_radar
   uart_id: uart_bus
-  update_interval: 1s
-  invert_y: false
-  invert_x: false
+  throttle: 100ms
 
 binary_sensor:
 - platform: ld2450
+  ld2450_id: ld2450_radar
   has_target:
-    name: "mmWave"
+    name: mmWave
     id: motion_mmwave
   has_moving_target:
-    name: "mmWave Moving Target"
+    name: mmWave Moving Target
   has_still_target:
-    name: "mmWave Still Target"
-  presence_regions:
-    - name: "Custom Presence Region 0"
-      region_id: presence_region_0
+    name: mmWave Still Target
 
 number:
 - platform: ld2450
-  rotate:
-    restore_value: true
-    initial_value: 0
-    name: "mmWave Rotate angle"
+  ld2450_id: ld2450_radar
   presence_timeout:
     name: "mmWave Presence timeout"
-  presence_regions:
-    - x0: 100
-      y0: 100
-      x1: 200
-      y1: 200
-      id: presence_region_0
-  entry_points:
-    - x: 0
-      y: 0
-  region_0:
-    x0:
-      name: R0X0
-    y0:
-      name: R0Y0
+  zone_1:
     x1:
-      name: R0X1
+      name: Zone1 X-Begin
+      mode: box
     y1:
-      name: R0Y1
-  region_1:
-    x0:
-      name: R1X0
-    y0:
-      name: R1Y0
+      name: Zone1 Y-Begin
+      mode: box
+    x2:
+      name: Zone1 X-End
+      mode: box
+    y2:
+      name: Zone1 Y-End
+      mode: box
+  zone_2:
     x1:
-      name: R1X1
+      name: Zone2 X-Begin
+      mode: box
     y1:
-      name: R1Y1
-  region_2:
-    x0:
-      name: R2X0
-    y0:
-      name: R2Y0
+      name: Zone2 Y-Begin
+      mode: box
+    x2:
+      name: Zone2 X-End
+      mode: box
+    y2:
+      name: Zone2 Y-End
+      mode: box
+  zone_3:
     x1:
-      name: R2X1
+      name: Zone3 X-Begin
+      mode: box
     y1:
-      name: R2Y1
-
-sensor:
-- platform: ld2450
-  target_count:
-    name: "mmWave Target count"
-  person_0:
-    position_x:
-      name: "mmWave Person 0 X"
-    position_y:
-      name: "mmWave Person 0 Y"
-    speed:
-      name: "mmWave Person 0 Speed"
-    resolution:
-      name: "mmWave Person 0 Resolution"
-  person_1:
-    position_x:
-      name: "mmWave Person 1 X"
-    position_y:
-      name: "mmWave Person 1 Y"
-    speed:
-      name: "mmWave Person 1 Speed"
-    resolution:
-      name: "mmWave Person 1 Resolution"
-  person_2:
-    position_x:
-      name: "mmWave Person 2 X"
-    position_y:
-      name: "mmWave Person 2 Y"
-    speed:
-      name: "mmWave Person 2 Speed"
-    resolution:
-      name: "mmWave Person 2 Resolution"
+      name: Zone3 Y-Begin
+      mode: box
+    x2:
+      name: Zone3 X-End
+      mode: box
+    y2:
+      name: Zone3 Y-End
+      mode: box
 
 switch:
-  - platform: ld2450
-    single_target:
-      name: "mmWave Single target"
-    bluetooth:
-      name: "mmWave Bluetooth"
-
-button:
-  - platform: ld2450
-    factory_reset:
-      name: "mmWave Factory Reset"
-    # reboot:
-      # name: "mmWave Restart"
-
-text_sensor:
-  - platform: ld2450
-    version:
-      name: "mmWave Firmware Version"
-    mac_address:
-      name: "mmWave Mac Address"
+- platform: ld2450
+  ld2450_id: ld2450_radar
+  bluetooth:
+    name: "mmWave Bluetooth"
+  multi_target:
+    name: "mmWave Multi Target"
 
 select:
-  - platform: ld2450
-    regions_type:
-      name: "mmWave Regions Type"
-    baud_rate:
-      name: "mmWave Baud Rate"
+- platform: ld2450
+  ld2450_id: ld2450_radar
+  zone_type:
+    name: "mmWave Zone Type"
+
+button:
+- platform: ld2450
+  ld2450_id: ld2450_radar
+  factory_reset:
+    name: "mmWave Factory Reset"
+    entity_category: "config"
+  restart:
+    name: "mmWave Restart"
+    entity_category: "config"
+
+text_sensor:
+- platform: ld2450
+  ld2450_id: ld2450_radar
+  version:
+    name: "mmWave Firmware Version"
+  mac_address:
+    name: "mmWave MAC Address"
+  target_1:
+    direction:
+      name: "mmWave Target1 Direction"
+  target_2:
+    direction:
+      name: "mmWave Target2 Direction"
+  target_3:
+    direction:
+      name: "mmWave Target3 Direction"
