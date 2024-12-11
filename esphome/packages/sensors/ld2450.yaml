@@ -22,11 +22,12 @@ ld2450:
 binary_sensor:
 - platform: ld2450
   has_target:
-    name: Presence
+    name: "mmWave"
+    id: motion_mmwave
   has_moving_target:
-    name: Moving Target
+    name: "mmWave Moving Target"
   has_still_target:
-    name: Still Target
+    name: "mmWave Still Target"
   presence_regions:
     - name: "Custom Presence Region 0"
       region_id: presence_region_0
@@ -77,48 +78,7 @@ number:
       name: R2X1
     y1:
       name: R2Y1
-      
-binary_sensor:
-  - platform: ld2410
-    has_target:
-      name: "mmWave"
-      id: motion_mmwave
-    has_moving_target:
-      name: "mmWave Moving Target"
-    has_still_target:
-      name: "mmWave Still Target"
-    out_pin_presence_status:
-      name: "mmWave out pin presence status"
 
-sensor:
-  - platform: ld2410
-    light:
-      name: light
-    moving_distance:
-      name: "mmWave Moving Distance"
-    still_distance:
-      name: "mmWave Still Distance"
-    moving_energy:
-      name: "mmWave Move Energy"
-    still_energy:
-      name: "mmWave Still Energy"
-    detection_distance:
-      name: "mmWave Detection Distance"
-    g0:
-      move_energy:
-        name: "mmWave g0 move energy"
-      still_energy:
-        name: "mmWave g0 still energy"
-    g1:
-      move_energy:
-        name: "mmWave g1 move energy"
-      still_energy:
-        name: "mmWave g1 still energy"
-    g2:
-      move_energy:
-        name: "mmWave g2 move energy"
-      still_energy:
-        name: "mmWave g2 still energy"
 sensor:
 - platform: ld2450
   target_count:
