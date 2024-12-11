@@ -132,17 +132,17 @@ sensor:
       name: Moving Target Count
     target_1:
       x:
-        name: Target1 X
+        name: Target-1 X
       y:
-        name: Target1 Y
+        name: Target-1 Y
       speed:
-        name: Target1 Speed
+        name: Target-1 Speed
       angle:
-        name: Target1 Angle
+        name: Target-1 Angle
       distance:
-        name: Target1 Distance
+        name: Target-1 Distance
       resolution:
-        name: Target1 Resolution
+        name: Target-1 Resolution
     target_2:
       x:
         name: Target-2 X
@@ -158,31 +158,31 @@ sensor:
         name: Target-2 Resolution
     target_3:
       x:
-        name: Target3 X
+        name: Target-3 X
       y:
-        name: Target3 Y
+        name: Target-3 Y
       speed:
-        name: Target3 Speed
+        name: Target-3 Speed
       angle:
-        name: Target3 Angle
+        name: Target-3 Angle
       distance:
-        name: Target3 Distance
+        name: Target-3 Distance
       resolution:
-        name: Target3 Resolution
+        name: Target-3 Resolution
     zone_1:
       target_count:
-        name: Zone1 All Target Count
+        name: Zone 1 All Target Count
       still_target_count:
-        name: Zone1 Still Target Count
+        name: Zone 1 Still Target Count
       moving_target_count:
-        name: Zone1 Moving Target Count
+        name: Zone 1 Moving Target Count
     zone_2:
       target_count:
-        name: Zone2 All Target Count
+        name: Zone 2 All Target Count
       still_target_count:
-        name: Zone2 Still Target Count
+        name: Zone 2 Still Target Count
       moving_target_count:
-        name: Zone2 Moving Target Count
+        name: Zone 2 Moving Target Count
     zone_3:
       target_count:
         name: Zone3 All Target Count
