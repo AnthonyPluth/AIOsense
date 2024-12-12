@@ -42,42 +42,42 @@ number:
     name: "mmWave Presence timeout"
   zone_1:
     x1:
-      name: Zone1 X-Begin
+      name: Zone 1 X-Begin
       mode: box
     y1:
-      name: Zone1 Y-Begin
+      name: Zone 1 Y-Begin
       mode: box
     x2:
-      name: Zone1 X-End
+      name: Zone 1 X-End
       mode: box
     y2:
-      name: Zone1 Y-End
+      name: Zone 1 Y-End
       mode: box
   zone_2:
     x1:
-      name: Zone2 X-Begin
+      name: Zone 2 X-Begin
       mode: box
     y1:
-      name: Zone2 Y-Begin
+      name: Zone 2 Y-Begin
       mode: box
     x2:
-      name: Zone2 X-End
+      name: Zone 2 X-End
       mode: box
     y2:
-      name: Zone2 Y-End
+      name: Zone 2 Y-End
       mode: box
   zone_3:
     x1:
-      name: Zone3 X-Begin
+      name: Zone 3 X-Begin
       mode: box
     y1:
-      name: Zone3 Y-Begin
+      name: Zone 3 Y-Begin
       mode: box
     x2:
-      name: Zone3 X-End
+      name: Zone 3 X-End
       mode: box
     y2:
-      name: Zone3 Y-End
+      name: Zone 3 Y-End
       mode: box
 
 switch:
