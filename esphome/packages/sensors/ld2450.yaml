@@ -160,7 +160,7 @@ sensor:
       x:
         name: Target 3 X
       y:
-        name: Target3 Y 
+        name: Target 3 Y 
       speed:
         name: Target 3 Speed
       angle:
