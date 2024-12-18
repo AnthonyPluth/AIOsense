@@ -28,13 +28,12 @@ display:
         it.printf(0, 20, id(roboto_large), "%.1f", id(iaq).state);
       } else if (id(display_state) == 3) {
         it.printf(0, 0, id(roboto_small), "Time:");
-        it.strftime(0, 20, id(roboto_large), "%I:%M %p", id(rtc_time).now());
+        it.strftime(0, 20, id(roboto_large), "%I:%M %p", id(sntp_time).now());
       }
 
-
 time:
-  - platform: ds3231
-    id: rtc_time
+  - platform: sntp
+    id: sntp_time
 
 interval:
   - interval: 5s
