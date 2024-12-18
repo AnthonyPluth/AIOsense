@@ -1,14 +1,38 @@
+globals:
+  - id: display_state
+    type: int
+    restore_value: no
+    initial_value: '0'
+
 font:
-  # gfonts://family[@weight]
   - file: "gfonts://Roboto"
-    id: roboto
-    size: 12
+    id: roboto_small
+    size: 15
+  - file: "gfonts://Roboto"
+    id: roboto_large
+    size: 24
 
 display:
   - platform: ssd1306_i2c
     model: "SSD1306 128x64"
-    reset_pin: D0
     address: 0x3C
     lambda: |-
-      // %% - literal % sign
-      it.printf(0, 0, id(roboto), "IAQ: %f", id(iaq).state);
+      if (id(display_state) == 0) {
+        it.printf(0, 0, id(roboto_small), "Temperature");
+        it.printf(0, 20, id(roboto_large), "%.1f°F", (id(temperature).state * 1.8) + 32.0);
+      } else if (id(display_state) == 1) {
+        it.printf(0, 0, id(roboto_small), "Humidity");
+        it.printf(0, 20, id(roboto_large), "%.1f%%", id(humidity).state);
+      } else if (id(display_state) == 2) {
+        it.printf(0, 0, id(roboto_small), "AQI");
+        it.printf(0, 20, id(roboto_large), "%.1f", id(iaq).state);
+      }
+
+interval:
+  - interval: 5s
+    then:
+      - lambda: |-
+          id(display_state) += 1;
+          if (id(display_state) > 2) {
+            id(display_state) = 0;
+          }
