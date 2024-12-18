@@ -7,10 +7,10 @@ globals:
 font:
   - file: "gfonts://Roboto"
     id: roboto_small
-    size: 15
+    size: 18
   - file: "gfonts://Roboto"
     id: roboto_large
-    size: 24
+    size: 36
 
 display:
   - platform: ssd1306_i2c
