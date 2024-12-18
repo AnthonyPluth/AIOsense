@@ -10,7 +10,7 @@ font:
     size: 18
   - file: "gfonts://Roboto"
     id: roboto_large
-    size: 36
+    size: 32
 
 display:
   - platform: ssd1306_i2c
