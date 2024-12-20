@@ -12,6 +12,10 @@ font:
     id: roboto_large
     size: 28
 
+color:
+  - name: blue
+    blue: 100%
+
 display:
   - platform: ssd1306_i2c
     model: "SSD1306 128x64"
