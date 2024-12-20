@@ -36,10 +36,10 @@ binary_sensor:
   has_target:
     name: mmWave
     id: motion_mmwave
-  has_moving_target:
-    name: mmWave Moving Target
-  has_still_target:
-    name: mmWave Still Target
+  # has_moving_target:
+  #   name: mmWave Moving Target
+  # has_still_target:
+  #   name: mmWave Still Target
 
 number:
 - platform: ld2450
