@@ -12,7 +12,7 @@ binary_sensor:
         if (!mmwave_active) {
           motion_start_time = millis();  // Record the time when motion starts
           mmwave_active = true;
-        } else if (millis() - motion_start_time >= 1000) { // Check if motion persists for 1 second
+        } else if (millis() - motion_start_time >= 3000) { // Check if motion persists for 3 seconds
           return true;
         }
       } else {
