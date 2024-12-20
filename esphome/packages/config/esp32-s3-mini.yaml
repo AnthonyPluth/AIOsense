@@ -22,6 +22,7 @@ esp32:
 i2c:
   sda: GPIO35
   scl: GPIO36
+  frequency: 400kHz
 
 sensor:
   - platform: internal_temperature
