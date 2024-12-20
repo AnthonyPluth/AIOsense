@@ -2,7 +2,7 @@ esphome:
   on_boot:
     priority: -10
     then:
-      - switch.turn_on: multi_target
+      - switch.turn_on: mmwave_multi_target
 
 external_components:
   - source: github://pr#5674
@@ -93,6 +93,7 @@ switch:
     name: "mmWave Bluetooth"
   multi_target:
     name: "mmWave Multi Target"
+    id: mmwave_multi_target
 
 select:
 - platform: ld2450
