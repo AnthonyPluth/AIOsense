@@ -133,40 +133,28 @@ sensor:
         name: Target 1 X
       y:
         name: Target 1 Y
-      speed:
-        name: Target 1 Speed
-      # angle:
-      #   name: Target 1 Angle
-      distance:
-        name: Target 1 Distance
-      # resolution:
-      #   name: Target 1 Resolution
+      # speed:
+      #   name: Target 1 Speed
+      # distance:
+      #   name: Target 1 Distance
     target_2:
       x:
         name: Target 2 X
       y:
         name: Target 2 Y
-      speed:
-        name: Target 2 Speed
-      # angle:
-      #   name: Target 2 Angle
-      distance:
-        name: Target 2 Distance
-      # resolution:
-      #   name: Target 2 Resolution
+      # speed:
+      #   name: Target 2 Speed
+      # distance:
+      #   name: Target 2 Distance
     target_3:
       x:
         name: Target 3 X
       y:
         name: Target 3 Y 
-      speed:
-        name: Target 3 Speed
-      # angle:
-      #   name: Target 3 Angle
-      distance:
-        name: Target 3 Distance
-      # resolution:
-      #   name: Target 3 Resolution
+      # speed:
+      #   name: Target 3 Speed
+      # distance:
+      #   name: Target 3 Distance
     zone_1:
       target_count:
         name: Zone 1 All Target Count
