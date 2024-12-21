@@ -25,7 +25,7 @@ display:
         it.printf(0, 20, id(roboto_large), "%.1f%%", id(humidity).state);
       } else if (id(display_state) == 2) {
         it.printf(0, 0, id(roboto_small), "AQI");
-        it.printf(0, 20, id(roboto_large) "%.1f", id(iaq).state);
+        it.printf(0, 20, id(roboto_large), "%.1f", id(iaq).state);
       } else if (id(display_state) == 3) {
         it.printf(0, 0, id(roboto_small), "Time:");
         it.strftime(0, 20, id(roboto_large), "%I:%M %p", id(sntp_time).now());
