@@ -14,6 +14,9 @@ font:
 
 color:
   - blue: 100%
+    green: 0%
+    red: 0%
+    white: 0%
     id: blue
 
 display:
