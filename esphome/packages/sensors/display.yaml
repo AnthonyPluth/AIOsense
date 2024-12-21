@@ -12,13 +12,6 @@ font:
     id: roboto_large
     size: 28
 
-color:
-  - blue: 100%
-    green: 0%
-    red: 0%
-    white: 0%
-    id: blue
-
 display:
   - platform: ssd1306_i2c
     model: "SSD1306 128x64"
@@ -26,16 +19,16 @@ display:
     lambda: |-
       if (id(display_state) == 0) {
         it.printf(0, 0, id(roboto_small), "Temperature");
-        it.printf(0, 20, id(roboto_large), id(blue), "%.1f°", (id(temperature).state * 1.8) + 32.0);
+        it.printf(0, 20, id(roboto_large), "%.1f°", (id(temperature).state * 1.8) + 32.0);
       } else if (id(display_state) == 1) {
         it.printf(0, 0, id(roboto_small), "Humidity");
-        it.printf(0, 20, id(roboto_large), id(blue), "%.1f%%", id(humidity).state);
+        it.printf(0, 20, id(roboto_large), "%.1f%%", id(humidity).state);
       } else if (id(display_state) == 2) {
         it.printf(0, 0, id(roboto_small), "AQI");
-        it.printf(0, 20, id(roboto_large), id(blue), "%.1f", id(iaq).state);
+        it.printf(0, 20, id(roboto_large) "%.1f", id(iaq).state);
       } else if (id(display_state) == 3) {
         it.printf(0, 0, id(roboto_small), "Time:");
-        it.strftime(0, 20, id(roboto_large), id(blue), "%I:%M %p", id(sntp_time).now());
+        it.strftime(0, 20, id(roboto_large), "%I:%M %p", id(sntp_time).now());
       }
 
 time:
