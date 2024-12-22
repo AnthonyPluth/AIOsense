@@ -13,5 +13,3 @@ binary_sensor:
       else {
         return id(occupancy).state;
       }
-    filters:
-      - delayed_on: 2s
