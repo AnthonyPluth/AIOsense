@@ -28,7 +28,7 @@ uart:
 ld2450:
   id: ld2450_radar
   uart_id: uart_bus
-  throttle: 100ms
+  throttle: 300ms
 
 binary_sensor:
 - platform: ld2450
