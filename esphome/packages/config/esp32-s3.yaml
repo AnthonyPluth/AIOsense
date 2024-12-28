@@ -18,8 +18,8 @@ esp32:
     type: esp-idf
 
 i2c:
-  sda: GPIO38
-  scl: GPIO45
+  sda: GPIO3
+  scl: GPIO15
   frequency: 400kHz
 
 sensor:
