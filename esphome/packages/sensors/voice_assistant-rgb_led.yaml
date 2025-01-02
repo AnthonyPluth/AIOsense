@@ -13,14 +13,6 @@ microphone:
     bits_per_sample: 32bit
     sample_rate: 16000
 
-micro_wake_word:
-  models:
-    - model: alexa
-    - model: okay_nabu
-  on_wake_word_detected:
-    - voice_assistant.start:
-        wake_word: !lambda return wake_word;
-
 voice_assistant:
   microphone: external_microphone
   noise_suppression_level: 2
