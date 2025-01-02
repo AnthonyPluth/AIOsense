@@ -118,46 +118,9 @@ esphome:
               - voice_assistant.start_continuous:
 
 micro_wake_word:
-  id: mww
   models:
-    - model: https://github.com/kahrendt/microWakeWord/releases/download/v2.1_models/okay_nabu.json
-      id: okay_nabu
-    - model: https://github.com/kahrendt/microWakeWord/releases/download/v2.1_models/alexa.json
-      id: alexa
-    - model: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
-      id: stop
-      internal: true
-  vad:
-    model: https://github.com/kahrendt/microWakeWord/releases/download/v2.1_models/vad.json
-  microphone: mic_i2s
+    - model: alexa
+    - model: okay_nabu
   on_wake_word_detected:
-    # If a timer is ringing: Stop it, do not start the voice assistant (We can stop timer from voice!)
-    - if:
-        condition:
-          switch.is_on: timer_ringing
-        then:
-          - switch.turn_off: timer_ringing
-        # Start voice assistant, stop current announcement.
-        else:
-          - if:
-              condition:
-                lambda: return id(nabu_media_player)->state == media_player::MediaPlayerState::MEDIA_PLAYER_STATE_ANNOUNCING;
-              then:
-                lambda: |-
-                  id(nabu_media_player)
-                    ->make_call()
-                    .set_command(media_player::MediaPlayerCommand::MEDIA_PLAYER_COMMAND_STOP)
-                    .set_announcement(true)
-                    .perform();
-              else:
-                - if:
-                    condition:
-                      switch.is_on: wake_sound
-                    then:
-                      - script.execute:
-                          id: play_sound
-                          priority: true
-                          sound_file: !lambda return id(wake_word_triggered_sound);
-                      - delay: 300ms
-                - voice_assistant.start:
-                    wake_word: !lambda return wake_word;
+    - voice_assistant.start:
+        wake_word: !lambda return wake_word;
