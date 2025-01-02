@@ -49,17 +49,12 @@ voice_assistant:
     - delay: 1s
     - script.execute: reset_led
     - script.wait: reset_led
-    - lambda: |-
-        if (code == "wake-provider-missing" || code == "wake-engine-missing") {
-          id(use_wake_word).turn_off();
-        }
 
 script:
   - id: reset_led
     then:
       - if:
           condition:
-            - switch.is_on: use_wake_word
             - switch.is_on: listen_light
           then:
             - light.turn_on:
@@ -73,26 +68,6 @@ script:
             - light.turn_off: led
 
 switch:
-  - platform: template
-    name: "VA Use Wake Word"
-    id: use_wake_word
-    optimistic: true
-    restore_mode: RESTORE_DEFAULT_ON
-    entity_category: config
-    on_turn_on:
-      - lambda: id(va).set_use_wake_word(true);
-      - if:
-          condition:
-            not:
-              - voice_assistant.is_running
-          then:
-            - voice_assistant.start_continuous
-      - script.execute: reset_led
-    on_turn_off:
-      - voice_assistant.stop
-      - lambda: id(va).set_use_wake_word(false);
-      - script.execute: reset_led
-
   - platform: template
     name: "VA Listen Light"
     id: listen_light
@@ -111,11 +86,7 @@ esphome:
       then:
         - wait_until: api.connected
         - delay: 1s
-        - if:
-            condition:
-              switch.is_on: use_wake_word
-            then:
-              - voice_assistant.start_continuous:
+        - voice_assistant.start_continuous:
 
 micro_wake_word:
   models:
