@@ -4,21 +4,12 @@ binary_sensor:
     id: occupancy
     device_class: occupancy
     lambda: |-
-      static bool occupancy_active = false;
-
-      // If PIR detects motion, set occupancy to on
-      if (id(motion_pir).state) {
-        occupancy_active = true;
-      }
-
-      // If occupancy is already on, mmWave can keep it on
-      if (occupancy_active && id(motion_mmwave).state) {
+      if (id(motion_mmwave).state or id(motion_pir).state) {
         return true;
       }
-
-      // Turn off occupancy if neither sensor detects motion
-      if (!id(motion_pir).state && !id(motion_mmwave).state) {
-        occupancy_active = false;
+      else if (id(motion_mmwave).state == 0 and id(motion_pir).state == 0) {
+        return false;
       }
-
-      return occupancy_active;
+      else {
+        return id(occupancy).state;
+      }
