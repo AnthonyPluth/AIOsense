@@ -30,15 +30,34 @@ microphone:
 
 speaker:
   - platform: i2s_audio
-    sample_rate: 48000
-    i2s_mode: secondary
-    i2s_dout_pin: GPIO10
-    bits_per_sample: 32bit
+    id: speaker_id
     i2s_audio_id: i2s_output
     dac_type: external
-    channel: stereo
+    i2s_dout_pin:   
+      number: GPIO10 #DIN Pin of the MAX98357A Audio Amplifier
+    sample_rate: 48000
+    buffer_duration: 90ms
+    # dac_type: external
+    # channel: stereo
+    i2s_mode: secondary
     timeout: never
-    buffer_duration: 100ms
+    bits_per_sample: 32bit
+
+  - platform: mixer
+    id: mixer_speaker_id
+    output_speaker: speaker_id
+    source_speakers:
+      - id: announcement_spk_mixer_input
+      - id: media_spk_mixer_input
+
+  - platform: resampler
+    id: media_spk_resampling_input
+    output_speaker: media_spk_mixer_input
+  - platform: resampler
+    id: announcement_spk_resampling_input
+    output_speaker: announcement_spk_mixer_input
+
+
 
 media_player:
   - platform: nabu
@@ -51,6 +70,12 @@ media_player:
     volume_increment: 0.05
     volume_min: 0.4
     volume_max: 0.85
+    media_pipeline:
+        speaker: media_spk_resampling_input
+        num_channels: 1
+    announcement_pipeline:
+        speaker: announcement_spk_resampling_input
+        num_channels: 1
     on_mute:
       - script.execute: control_leds
     on_unmute:
