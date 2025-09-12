@@ -5,14 +5,12 @@ binary_sensor:
     device_class: occupancy
     lambda: |-
       // PIR sensor triggers occupancy
-      if (id(motion_pir).state) {
+      if (id(motion_mmwave).state or id(motion_pir).state) {
         return true;
       }
-      
-      // mmWave keeps occupancy true, but only if PIR has triggered first
-      if (id(occupancy).state && id(motion_mmwave).state) {
-        return true;
+      else if (id(motion_mmwave).state == 0 and id(motion_pir).state == 0) {
+        return false;
       }
-      
-      // Default to false if neither PIR nor mmWave conditions are met
-      return false;
+      else {
+        return id(occupancy).state;
+      }
