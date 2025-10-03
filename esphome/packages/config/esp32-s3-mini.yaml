@@ -16,7 +16,8 @@ esp32:
   flash_size: 4MB
   framework:
     type: esp-idf
-
+    version: 5.4.1
+    
 i2c:
   sda: GPIO35
   scl: GPIO36
