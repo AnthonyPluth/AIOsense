@@ -1,0 +1,28 @@
+substitutions:
+  bme_address: "0x77"
+  humidity_offset: "0"
+  pressure_offset: "0"
+  temperature_offset: "-6"
+
+bme68x_bsec2_i2c:
+  address: "${bme_address}"
+  model: bme680
+  operating_age: 28d
+  sample_rate: LP
+  supply_voltage: 3.3V
+
+sensor:
+  - platform: bme68x_bsec2
+    temperature:
+      name: "BME68x Temperature"
+    pressure:
+      name: "BME68x Pressure"
+    humidity:
+      name: "BME68x Humidity"
+    iaq:
+      name: "BME68x IAQ"
+      id: iaq
+    co2_equivalent:
+      name: "BME68x CO2 Equivalent"
+    breath_voc_equivalent:
+      name: "BME68x Breath VOC Equivalent"
