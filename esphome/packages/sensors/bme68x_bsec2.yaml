@@ -10,10 +10,12 @@ sensor:
   - platform: bme68x_bsec2
     temperature:
       name: "Temperature"
+      id: temperature
     pressure:
       name: "Pressure"
     humidity:
       name: "Humidity"
+      id: humidity
     iaq:
       name: "IAQ"
       id: iaq
