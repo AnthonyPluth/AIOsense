@@ -1,15 +1,10 @@
-substitutions:
-  bme_address: "0x77"
-  humidity_offset: "0"
-  pressure_offset: "0"
-  temperature_offset: "-6"
-
 bme68x_bsec2_i2c:
-  address: "${bme_address}"
+  address: "0x77"
   model: bme680
   operating_age: 28d
   sample_rate: LP
   supply_voltage: 3.3V
+  temperature_offset: "-6"
 
 sensor:
   - platform: bme68x_bsec2
