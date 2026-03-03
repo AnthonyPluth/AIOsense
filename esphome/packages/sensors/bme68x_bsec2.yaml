@@ -9,15 +9,15 @@ bme68x_bsec2_i2c:
 sensor:
   - platform: bme68x_bsec2
     temperature:
-      name: "BME68x Temperature"
+      name: "Temperature"
     pressure:
-      name: "BME68x Pressure"
+      name: "Pressure"
     humidity:
-      name: "BME68x Humidity"
+      name: "Humidity"
     iaq:
-      name: "BME68x IAQ"
+      name: "IAQ"
       id: iaq
     co2_equivalent:
-      name: "BME68x CO2 Equivalent"
+      name: "CO2 Equivalent"
     breath_voc_equivalent:
-      name: "BME68x Breath VOC Equivalent"
+      name: "VOC Equivalent"
