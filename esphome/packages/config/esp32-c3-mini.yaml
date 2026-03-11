@@ -15,7 +15,7 @@ esp32:
   variant: ESP32C3
   framework:
     type: esp-idf
-    platform_version: 6.9.0
+    # platform_version: 6.9.0
     # version: "5.3.1"
 
 wifi:
