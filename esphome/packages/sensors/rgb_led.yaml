@@ -12,6 +12,9 @@ light:
     num_leds: 1
     pin: "${rgb_led_pin}"
     icon: "mdi:led-outline"
+    effects:
+      - pulse:
+          name: pulse
 
 esphome:
   on_boot:
