@@ -14,8 +14,6 @@ esphome:
 logger:
   baud_rate: 0  # disable logging via UART
 
-captive_portal:
-
 i2c:
   scan: true
 
