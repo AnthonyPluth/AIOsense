@@ -1,0 +1,21 @@
+# CI test config: validates package combinations with 'esphome config'
+substitutions:
+  name: ci-s3-voice
+  friendly_name: CI s3-voice
+
+packages:
+  base: !include ../packages/config/base.yaml
+  board: !include ../packages/config/esp32-s3-mini.yaml
+  bh1750: !include ../packages/sensors/bh1750.yaml
+  bme68x: !include ../packages/sensors/bme68x.yaml
+  pir: !include ../packages/sensors/pir.yaml
+  rgb_led: !include ../packages/sensors/rgb_led.yaml
+  ld2410: !include ../packages/sensors/ld2410.yaml
+  voice_assistant_rgb_led: !include ../packages/sensors/voice_assistant-rgb_led.yaml
+
+api:
+ota:
+  - platform: esphome
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password

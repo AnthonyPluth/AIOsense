@@ -1,3 +1,4 @@
+# yamllint disable rule:comments-indentation
 # https://esphome.io/components/sensor/ld2410.html
 
 uart:
@@ -14,12 +15,16 @@ number:
   - platform: ld2410
     timeout:
       name: "mmWave Timeout"
+      entity_category: config
     light_threshold:
       name: "mmWave Light Threshold"
+      entity_category: config
     max_move_distance_gate:
       name: "mmWave Max Move Distance Gate"
+      entity_category: config
     max_still_distance_gate:
       name: "mmWave Max Still Distance Gate"
+      entity_category: config
     # g0:
     #   move_threshold:
     #     name: "mmWave g0 move threshold"
@@ -77,6 +82,7 @@ binary_sensor:
       name: "mmWave Still Target"
     out_pin_presence_status:
       name: "mmWave out pin presence status"
+      disabled_by_default: true
 
 sensor:
   - platform: ld2410
@@ -142,32 +148,50 @@ switch:
   - platform: ld2410
     engineering_mode:
       name: "mmWave Engineering Mode"
+      entity_category: config
+      disabled_by_default: true
     bluetooth:
       name: "mmWave Bluetooth"
+      entity_category: config
+      disabled_by_default: true
 
 button:
   - platform: ld2410
     factory_reset:
       name: "mmWave Factory Reset"
+      entity_category: config
+      disabled_by_default: true
     restart:
       name: "mmWave Restart"
+      entity_category: config
     query_params:
       name: "mmWave Force Refresh"
+      entity_category: config
 
 text_sensor:
   - platform: ld2410
     version:
       name: "mmWave Firmware Version"
+      entity_category: diagnostic
     mac_address:
       name: "mmWave Mac Address"
+      entity_category: diagnostic
+      disabled_by_default: true
 
 select:
   - platform: ld2410
     distance_resolution:
       name: "mmWave Distance Resolution"
+      entity_category: config
     baud_rate:
-      name: "mmWave Baud Tate"
+      name: "mmWave Baud Rate"
+      entity_category: config
+      disabled_by_default: true
     light_function:
       name: "mmWave Light Function"
+      entity_category: config
+      disabled_by_default: true
     out_pin_level:
       name: "mmWave Out Pin Level"
+      entity_category: config
+      disabled_by_default: true

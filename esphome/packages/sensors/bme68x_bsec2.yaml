@@ -1,10 +1,21 @@
-bme68x_bsec2_i2c:
-  address: "0x77"
-  model: bme680
-  operating_age: 28d
-  sample_rate: LP
-  supply_voltage: 3.3V
+# https://esphome.io/components/sensor/bme68x_bsec2.html
+# Bosch BSEC2 algorithm: calibrated IAQ, CO2 and VOC equivalents.
+# Use INSTEAD of bme68x.yaml. Requires the Bosch BSEC2 licence terms.
+
+substitutions:
+  bme_address: "0x77"
+  bme_model: bme680
+  bme_sample_rate: LP  # LP (3s) or ULP (300s)
   temperature_offset: "-6"
+
+bme68x_bsec2_i2c:
+  address: "${bme_address}"
+  model: "${bme_model}"
+  operating_age: 28d
+  sample_rate: "${bme_sample_rate}"
+  supply_voltage: 3.3V
+  temperature_offset: "${temperature_offset}"
+  state_save_interval: 6h
 
 sensor:
   - platform: bme68x_bsec2
@@ -19,7 +30,16 @@ sensor:
     iaq:
       name: "IAQ"
       id: iaq
+    iaq_accuracy:
+      name: "IAQ Accuracy"
+      entity_category: diagnostic
     co2_equivalent:
       name: "CO2 Equivalent"
     breath_voc_equivalent:
       name: "VOC Equivalent"
+
+text_sensor:
+  - platform: bme68x_bsec2
+    iaq_accuracy:
+      name: "IAQ Accuracy Text"
+      entity_category: diagnostic

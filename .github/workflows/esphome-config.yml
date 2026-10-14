@@ -1,0 +1,38 @@
+name: ESPHome config
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'esphome/**'
+      - '.github/workflows/esphome-config.yml'
+  pull_request:
+    branches: ["main"]
+    paths:
+      - 'esphome/**'
+      - '.github/workflows/esphome-config.yml'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - c3-bme280
+          - c3-bsec2
+          - s2-bme680
+          - s3-full
+          - s3-voice
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Install ESPHome
+        run: pip install esphome
+      - name: Validate ${{ matrix.config }}
+        working-directory: esphome/tests
+        run: esphome config ${{ matrix.config }}.yaml

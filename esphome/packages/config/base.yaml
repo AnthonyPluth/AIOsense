@@ -5,6 +5,8 @@ esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
 
+  min_version: 2026.9.0
+
   project:
     name: "Schluggi.AIOsense"
     version: "${version}"
@@ -34,7 +36,11 @@ button:
 binary_sensor:
   - platform: status
     name: "Status"
+    device_class: connectivity
+    entity_category: diagnostic
 
 sensor:
   - platform: wifi_signal
     name: "Wifi Signal"
+    device_class: signal_strength
+    entity_category: diagnostic
