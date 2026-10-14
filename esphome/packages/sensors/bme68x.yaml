@@ -16,7 +16,7 @@ sensor:
       state_class: measurement
       filters:
         - offset: ${temperature_offset}
-        - lambda: "return x + id(temperature_offset_ui).state;" 
+        - lambda: "return x + id(temperature_offset_ui).state;"
     pressure:
       name: "Pressure"
       id: pressure
@@ -26,7 +26,7 @@ sensor:
         - offset: ${pressure_offset}
         - lambda: "return x + id(pressure_offset_ui).state;"
     gas_resistance:
-      name: "Gas Resistance" # in Ω
+      name: "Gas Resistance"  # in Ω
       id: gas_resistance
       state_class: measurement
     humidity:
@@ -72,12 +72,12 @@ sensor:
       //
       // AQI = 50 * (ratio)^3 if ratio >= 1
       // AQI = 50 * (ratio)   if ratio < 1
-      
+
       float aqi;
       if (ratio >= 1.0) {
-        aqi = 50.0 * pow(ratio, 3.0); 
+        aqi = 50.0 * pow(ratio, 3.0);
       } else {
-        aqi = 50.0 * ratio; 
+        aqi = 50.0 * ratio;
       }
 
       // Clamp AQI to a maximum of 500 for sanity's sake.

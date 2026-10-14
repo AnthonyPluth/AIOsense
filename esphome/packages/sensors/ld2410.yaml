@@ -1,3 +1,4 @@
+# yamllint disable rule:comments-indentation
 # https://esphome.io/components/sensor/ld2410.html
 
 uart:

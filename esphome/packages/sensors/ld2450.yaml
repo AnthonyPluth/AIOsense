@@ -6,12 +6,12 @@ esphome:
 
 uart:
   id: uart_bus
-  rx_pin: 
+  rx_pin:
     number: "${uart_tx_pin}"
     mode:
       input: true
       pullup: true
-  tx_pin: 
+  tx_pin:
     number: "${uart_rx_pin}"
     mode:
       input: true
@@ -25,93 +25,93 @@ ld2450:
   uart_id: uart_bus
 
 binary_sensor:
-- platform: ld2450
-  ld2450_id: ld2450_radar
-  has_target:
-    name: mmWave
-    id: motion_mmwave
-  has_moving_target:
-    name: mmWave Moving Target
-  has_still_target:
-    name: mmWave Still Target
+  - platform: ld2450
+    ld2450_id: ld2450_radar
+    has_target:
+      name: mmWave
+      id: motion_mmwave
+    has_moving_target:
+      name: mmWave Moving Target
+    has_still_target:
+      name: mmWave Still Target
 
 number:
-- platform: ld2450
-  ld2450_id: ld2450_radar
-  presence_timeout:
-    name: "mmWave Presence timeout"
-  zone_1:
-    x1:
-      name: Zone 1 X-Begin
-      mode: box
-    y1:
-      name: Zone 1 Y-Begin
-      mode: box
-    x2:
-      name: Zone 1 X-End
-      mode: box
-    y2:
-      name: Zone 1 Y-End
-      mode: box
-  zone_2:
-    x1:
-      name: Zone 2 X-Begin
-      mode: box
-    y1:
-      name: Zone 2 Y-Begin
-      mode: box
-    x2:
-      name: Zone 2 X-End
-      mode: box
-    y2:
-      name: Zone 2 Y-End
-      mode: box
-  zone_3:
-    x1:
-      name: Zone 3 X-Begin
-      mode: box
-    y1:
-      name: Zone 3 Y-Begin
-      mode: box
-    x2:
-      name: Zone 3 X-End
-      mode: box
-    y2:
-      name: Zone 3 Y-End
-      mode: box
+  - platform: ld2450
+    ld2450_id: ld2450_radar
+    presence_timeout:
+      name: "mmWave Presence timeout"
+    zone_1:
+      x1:
+        name: Zone 1 X-Begin
+        mode: box
+      y1:
+        name: Zone 1 Y-Begin
+        mode: box
+      x2:
+        name: Zone 1 X-End
+        mode: box
+      y2:
+        name: Zone 1 Y-End
+        mode: box
+    zone_2:
+      x1:
+        name: Zone 2 X-Begin
+        mode: box
+      y1:
+        name: Zone 2 Y-Begin
+        mode: box
+      x2:
+        name: Zone 2 X-End
+        mode: box
+      y2:
+        name: Zone 2 Y-End
+        mode: box
+    zone_3:
+      x1:
+        name: Zone 3 X-Begin
+        mode: box
+      y1:
+        name: Zone 3 Y-Begin
+        mode: box
+      x2:
+        name: Zone 3 X-End
+        mode: box
+      y2:
+        name: Zone 3 Y-End
+        mode: box
 
 switch:
-- platform: ld2450
-  ld2450_id: ld2450_radar
-  bluetooth:
-    name: "mmWave Bluetooth"
-  multi_target:
-    name: "mmWave Multi Target"
-    id: mmwave_multi_target
+  - platform: ld2450
+    ld2450_id: ld2450_radar
+    bluetooth:
+      name: "mmWave Bluetooth"
+    multi_target:
+      name: "mmWave Multi Target"
+      id: mmwave_multi_target
 
 select:
-- platform: ld2450
-  ld2450_id: ld2450_radar
-  zone_type:
-    name: "mmWave Zone Type"
+  - platform: ld2450
+    ld2450_id: ld2450_radar
+    zone_type:
+      name: "mmWave Zone Type"
 
 button:
-- platform: ld2450
-  ld2450_id: ld2450_radar
-  factory_reset:
-    name: "mmWave Factory Reset"
-    entity_category: "config"
-  restart:
-    name: "mmWave Restart"
-    entity_category: "config"
+  - platform: ld2450
+    ld2450_id: ld2450_radar
+    factory_reset:
+      name: "mmWave Factory Reset"
+      entity_category: "config"
+    restart:
+      name: "mmWave Restart"
+      entity_category: "config"
 
 text_sensor:
-- platform: ld2450
-  ld2450_id: ld2450_radar
-  version:
-    name: "mmWave Firmware Version"
-  mac_address:
-    name: "mmWave MAC Address"
+  - platform: ld2450
+    ld2450_id: ld2450_radar
+    version:
+      name: "mmWave Firmware Version"
+    mac_address:
+      name: "mmWave MAC Address"
 
 sensor:
   - platform: ld2450
@@ -144,7 +144,7 @@ sensor:
       x:
         name: Target 3 X
       y:
-        name: Target 3 Y 
+        name: Target 3 Y
       speed:
         name: Target 3 Speed
       distance:

@@ -5,7 +5,7 @@ substitutions:
 globals:
   - id: display_state
     type: int
-    restore_value: no
+    restore_value: false
     initial_value: '0'
 
 font:

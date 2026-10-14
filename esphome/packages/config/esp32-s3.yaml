@@ -1,8 +1,8 @@
 substitutions:
   buzzer_pin: GPIO13
-  i2s_bclk_pin: GPIO47 #SCK
-  i2s_din_pin: GPIO46 #SD
-  i2s_lrclk_pin: GPIO15 #WS
+  i2s_bclk_pin: GPIO47  # SCK
+  i2s_din_pin: GPIO46  # SD
+  i2s_lrclk_pin: GPIO15  # WS
   pir_pin: GPIO11
   rgb_led_pin: GPIO38
   rgb_led_type: RGB
