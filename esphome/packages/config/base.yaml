@@ -11,10 +11,6 @@ esphome:
     name: "Schluggi.AIOsense"
     version: "${version}"
 
-dashboard_import:
-  package_import_url: github://schluggi/AIOsense/esphome/esphome.yaml@main
-  import_full_config: false
-
 logger:
   baud_rate: 0  # disable logging via UART
 

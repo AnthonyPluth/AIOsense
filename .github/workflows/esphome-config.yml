@@ -5,10 +5,12 @@ on:
     branches: ["main"]
     paths:
       - 'esphome/**'
+      - '.github/workflows/esphome-config.yml'
   pull_request:
     branches: ["main"]
     paths:
       - 'esphome/**'
+      - '.github/workflows/esphome-config.yml'
   workflow_dispatch:
 
 jobs:
