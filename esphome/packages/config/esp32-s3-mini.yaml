@@ -25,6 +25,7 @@ i2c:
 sensor:
   - platform: internal_temperature
     name: "CPU Temperature"
+    entity_category: diagnostic
 
 psram:
   mode: quad

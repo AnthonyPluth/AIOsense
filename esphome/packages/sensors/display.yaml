@@ -1,3 +1,7 @@
+substitutions:
+  temperature_unit: "F"  # F or C
+  time_format: "%I:%M %p"  # use "%H:%M" for 24h
+
 globals:
   - id: display_state
     type: int
@@ -19,7 +23,11 @@ display:
     lambda: |-
       if (id(display_state) == 0) {
         it.printf(0, 0, id(roboto_small), "Temperature");
-        it.printf(0, 20, id(roboto_large), "%.1f°", (id(temperature).state * 1.8) + 32.0);
+        if ("${temperature_unit}" == "C") {
+          it.printf(0, 20, id(roboto_large), "%.1f°C", id(temperature).state);
+        } else {
+          it.printf(0, 20, id(roboto_large), "%.1f°F", (id(temperature).state * 1.8) + 32.0);
+        }
       } else if (id(display_state) == 1) {
         it.printf(0, 0, id(roboto_small), "Humidity");
         it.printf(0, 20, id(roboto_large), "%.1f%%", id(humidity).state);
@@ -28,11 +36,11 @@ display:
         it.printf(0, 20, id(roboto_large), "%.1f", id(iaq).state);
       } else if (id(display_state) == 3) {
         it.printf(0, 0, id(roboto_small), "Time:");
-        it.strftime(0, 20, id(roboto_large), "%I:%M %p", id(sntp_time).now());
+        it.strftime(0, 20, id(roboto_large), "${time_format}", id(sntp_time).now());
       }
 
 time:
-  - platform: sntp
+  - platform: homeassistant
     id: sntp_time
 
 interval:

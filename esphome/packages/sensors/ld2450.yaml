@@ -4,11 +4,6 @@ esphome:
     then:
       - switch.turn_on: mmwave_multi_target
 
-external_components:
-  - source: github://pr#5674
-    components: [ ld2450 ]
-    refresh: 600s
-
 uart:
   id: uart_bus
   rx_pin: 
@@ -28,7 +23,6 @@ uart:
 ld2450:
   id: ld2450_radar
   uart_id: uart_bus
-  throttle: 300ms
 
 binary_sensor:
 - platform: ld2450

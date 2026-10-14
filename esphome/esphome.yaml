@@ -7,6 +7,9 @@ substitutions:
   # bme_address: "0x77"  # for some modules you have to change it to 0x76
   # bme_update_interval: 30s
 
+  # temperature_unit: "F"  # display only: F or C
+  # time_format: "%I:%M %p"  # display only, "%H:%M" for 24h
+
   # illuminance_offset: "0"
   # co2_offset: "0"  # bsec only
   # humidity_offset: "0"
@@ -40,6 +43,7 @@ packages:
       - esphome/packages/sensors/bme68x.yaml  # enable for bme680
       # - esphome/packages/sensors/buzzer.yaml  # PCB >= v2.1.0
       - esphome/packages/sensors/display.yaml
+      # - esphome/packages/sensors/debug.yaml  # heap, loop time, reset reason
       - esphome/packages/sensors/occupancy.yaml  # only if pir & mmWave are activated
       - esphome/packages/sensors/pir.yaml
 
