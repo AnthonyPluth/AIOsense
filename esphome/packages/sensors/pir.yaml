@@ -1,6 +1,6 @@
 substitutions:
   pir_delayed_off: 1s
-  pir_delayed_on: 1s
+  pir_delayed_on: 0.5s
   pir_pin_mode: "INPUT_PULLDOWN"
 
 binary_sensor:
